@@ -64,6 +64,7 @@ function loaddata() {
   <i class="fa fa-spinner fa-spin fa-pulse"></i></div></div>`)
 
   Url = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${search}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`
+
   console.log(Url)
   const settings = {
     "async": true,
@@ -71,7 +72,7 @@ function loaddata() {
     "url": Url,
     "method": "GET",
     "headers": {
-      "X-RapidAPI-Key": "d2af94ecacmshdeebfc210373e8ep177d99jsn573b3d727456",
+      "X-RapidAPI-Key": "accedf7bf4msh4a8a92463ff4f82p149113jsn12c0378dffad", //"d2af94ecacmshdeebfc210373e8ep177d99jsn573b3d727456",
       "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com"
     }
   };
