@@ -1,0 +1,148 @@
+.float {
+	position: fixed;
+	width: 60px;
+	height: 60px;
+	bottom: 35px;
+	right: 40px;
+	background-color: #0C9;
+	color: #FFF;
+	border-radius: 50px;
+	text-align: center;
+	align-content: center;
+	align-self: auto;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.float-2 {
+	position: fixed;
+	width: 60px;
+	height: 60px;
+	bottom: 35px;
+	right: 120px;
+	background-color: #0C9;
+	color: #FFF;
+	border-radius: 50px;
+	text-align: center;
+	align-content: center;
+	align-self: auto;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float {
+	margin-top: 22px;
+}
+
+.col {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	flex: 0.25
+}
+
+#news_block {
+	margin-bottom: 30px;
+}
+
+.dark {
+	background: #000000;
+}
+
+img {
+	max-height: 250px;
+	height: auto;
+	width: auto;
+	margin-bottom: 25px;
+	border-radius: 25px;
+}
+
+
+
+body {
+	font-family: 'Lato', sans-serif;
+}
+
+.overlay {
+	height: 0%;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.9);
+	overflow-y: hidden;
+	transition: 0.5s;
+}
+
+.overlay-content {
+	position: relative;
+	top: 25%;
+	width: 100%;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.overlay a {
+	padding: 8px;
+	text-decoration: none;
+	font-size: 24px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
+
+.overlay a:hover,
+.overlay a:focus {
+	color: #f1f1f1;
+}
+
+.overlay .closebtn {
+	position: absolute;
+	top: 20px;
+	right: 45px;
+	font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+	.overlay {
+		overflow-y: auto;
+	}
+
+	.overlay a {
+		font-size: 20px
+	}
+
+	.overlay .closebtn {
+		font-size: 40px;
+		top: 15px;
+		right: 35px;
+	}
+}
+
+
+
+.button {
+	border: none;
+	color: white;
+	font-size: 24px;
+	margin: 4px 2px;
+	transition-duration: 1s;
+	cursor: pointer;
+	border-radius: 20px;
+}
+
+.button1 {
+	background-color: white;
+	color: black;
+	border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+	background-color: #4CAF50;
+	color: white;
+}
+
+
+#text{
+	color:#f1f1f1
+}
