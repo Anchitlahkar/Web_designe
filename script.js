@@ -55,11 +55,12 @@ $(`.dropdown-item`).click(function () {
   $("#news-removable").append(`<div class="col flex-container"></div>`)
   search = country_name
   loaddata()
-  $(".loading").append(`<div><div class="fa-5x loading_class">
-  <i class="fa fa-spinner fa-spin fa-pulse"></i></div></div>`)
 })
 
 function loaddata() {
+  $(".loading").append(`<div><div class="fa-5x loading_class">
+  <i class="fa fa-spinner fa-spin fa-pulse"></i></div></div>`)
+
   Url = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${search}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`
   console.log(Url)
   const settings = {
@@ -87,8 +88,6 @@ $("#search-btn").click(function () {
   if (value !== "") {
     search = value
     loaddata()
-    $(".loading").append(`<div><div class="fa-5x loading_class">
-  <i class="fa fa-spinner fa-spin fa-pulse"></i></div></div>`)
   }
   else{
     alert("Please enter a keyword")
@@ -158,6 +157,6 @@ function show_news() {
 }
 
 
-$(`#news-removable`).click(function () {
-
+$("#News-reload").click(function () {
+  location.reload(true)
 })
