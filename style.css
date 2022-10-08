@@ -51,10 +51,20 @@ img {
 	max-height: 250px;
 	height: auto;
 	width: auto;
+	max-width: 500px;
 	margin-bottom: 25px;
 	border-radius: 25px;
 }
 
+#together{
+	max-width: 550px;
+}
+
+#news-removable{
+	display: flex;
+	justify-content: flex-start;
+	
+}
 
 
 body {

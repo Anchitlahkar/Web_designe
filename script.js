@@ -1,12 +1,12 @@
-country = ["Argentina", "Australia", "Austria", "Belgium", "Brazil", "Bulgaria", "Canada", "China", "Colombia", "Cuba", "Czech Republic", "Egypt", "France", "Germany",
- "Greece", "Hong Kong", "Hungary", "India", "Indonesia", "Ireland", "Israel", "Italy", "Japan", "Latvia", "Lithuania", "Malaysia", "Mexico", "Morocco", "Netherlands",
-  "New Zealand", "Nigeria", "Norway", "Philippines", "Poland", "Portugal", "Romania", "Russia", "Saudi Arabia", "Serbia", "Singapore", "Slovakia", "Slovenia",
-   "South Africa", "South Korea", "Sweden", "Switzerland", "Taiwan", "Thailand", "Turkey", "UAE", "Ukraine", "United Kingdom", "United States", "Venuzuela"]
+country = ["Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Brazil", "Bulgaria", "Canada", "Chile", "China", "Colombia", "Cuba", "Czech_republic", "Egypt",
+"Finland","France", "Germany", "Greece", "Hong_kong", "Hungary", "India", "Indonesia", "Iraq", "Ireland", "Israel", "Italy", "Japan", "Kazakhstan", "Kuwait", "Latvia",
+"Lebanon", "Lithuania","Malaysia", "Mexico", "Morocco", "Netherland", "New_zealand", "Nigeria", "North_korea", "Norway", "Pakistan", "Peru", "Philippines", "Poland",
+"Portugal", "Romania", "Russia","Saudi_arabia", "Serbia", "Singapore", "Slovakia", "Slovenia", "South_africa", "South_korea", "Spain", "Sweden", "Switzerland",
+"Taiwan", "Tanzania", "Thailand", "Turkey","Ukraine", "United_arab_emirates", "United_kingdom", "United_states_of_america", "Venezuela", "Vietnam",]
 
-country_codes = ["ar",
-  "au", "at", "be", "br", "bg", "ca", "cn", "co", "cu", "cz", "eg", "fr", "de", "gr", "hk", "hu", "in", "id", "ie", "il", "it", "jp", "lv", "lt",
-  "my", "mx", "ma", "nl", "nz", "ng", "no", "ph", "pl", "pt", "ro", "ru", "sa", "rs", "sg", "sk", "si", "za", "kr", "se", "ch", "tw", "th", "tr",
-  "ae", "ua", "gb", "us", "ve"]
+country_codes = ["ar", "au", "at", "bd", "be", "br", "bg", "ca", "cl", "cn", "co", "cu", "cz", "eg", "fi", "fr", "de", "gr", "hk", "hu", "in", "id", "iq", "ie", "il",
+ "it", "jp", "kz", "kw", "lv", "lb", "lt", "my", "mx", "ma", "nl", "nz", "ng", "kp", "no", "pk", "pe", "ph", "pl", "pt", "ro", "ru", "sa", "rs", "sg", "sk", "si", "za",
+  "kr", "es", "se", "ch", "tw", "tz", "th", "tr", "ua", "ae", "gb", "us", "ve", "vi",]
 
 news = null
 code = "in"
@@ -56,43 +56,45 @@ $(`.dropdown-item`).click(function () {
 })
 
 function loaddata() {
-  url = `https://newsapi.org/v2/top-headlines?country=${code}&apiKey=5e61b7561e794a1d9e169219bf23c6db`
-  console.log(url)
-
-  $.ajax({
-    url: url,
-    type: 'GET',
-    success: function (res) {
-      news = res.articles;
-      result = res.totalResults
-      sort_news_data(news)
-      show_news()
-    },
-    error: function (res) {
-      console.log(res)
+  const settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${country_name}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`,
+    "method": "GET",
+    "headers": {
+      "X-RapidAPI-Key": "d2af94ecacmshdeebfc210373e8ep177d99jsn573b3d727456",
+      "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com"
     }
-  })
+  };
+  
+  $.ajax(settings).done(function (response) {
+    news = response.value
+    sort_news_data(news)
+    show_news()
+  });
 }
 
 function sort_news_data(data) {
+  console.log(data)
   for (i = 0; i < data.length; i++) {
-    author.push(data[i].author)
-    content.push(data[i].content)
+    author.push(data[i].provider.name)
+    content.push(data[i].snippet)
     description.push(data[i].description)
     title.push(data[i].title)
     url_news.push(data[i].url)
-    urlToImage.push(data[i].urlToImage)
+    urlToImage.push(data[i].image.url)
   }
 }
 
 
 function show_news() {
-  for (i = 0; i < author.length; i++) {
+  for (i = 0; i < title.length; i++) {
     if (title[i] !== null) {
+      if(content[i]!==null){
       $(".col").append(`
-      <div class="together${i}">
+      <div id="together" class="together${i}">
           <div id="news_block" class="card shadow-sm">
-              <img id="image" src="${urlToImage[i]}" alt="Image" />
+              <img id="image" src="${urlToImage[i]}" alt="Loading...." />
             <div class="card-body">
             <h3>${title[i]}</h3>
               <p class="card-text">${description[i]}</p>
@@ -126,7 +128,7 @@ function show_news() {
           </script>
           <div>
         `)
-    }
+    }}
   }
 }
 
