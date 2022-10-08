@@ -58,6 +58,8 @@ $(`.dropdown-item`).click(function () {
 })
 
 function loaddata() {
+  $(".loading_class").remove()
+
   $(".loading").append(`<div><div class="fa-5x loading_class">
   <i class="fa fa-spinner fa-spin fa-pulse"></i></div></div>`)
 
