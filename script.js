@@ -1,16 +1,17 @@
 country = ["Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Brazil", "Bulgaria", "Canada", "Chile", "China", "Colombia", "Cuba", "Czech_republic", "Egypt",
-"Finland","France", "Germany", "Greece", "Hong_kong", "Hungary", "India", "Indonesia", "Iraq", "Ireland", "Israel", "Italy", "Japan", "Kazakhstan", "Kuwait", "Latvia",
-"Lebanon", "Lithuania","Malaysia", "Mexico", "Morocco", "Netherland", "New_zealand", "Nigeria", "North_korea", "Norway", "Pakistan", "Peru", "Philippines", "Poland",
-"Portugal", "Romania", "Russia","Saudi_arabia", "Serbia", "Singapore", "Slovakia", "Slovenia", "South_africa", "South_korea", "Spain", "Sweden", "Switzerland",
-"Taiwan", "Tanzania", "Thailand", "Turkey","Ukraine", "United_arab_emirates", "United_kingdom", "United_states_of_america", "Venezuela", "Vietnam",]
+  "Finland", "France", "Germany", "Greece", "Hong_kong", "Hungary", "India", "Indonesia", "Iraq", "Ireland", "Israel", "Italy", "Japan", "Kazakhstan", "Kuwait", "Latvia",
+  "Lebanon", "Lithuania", "Malaysia", "Mexico", "Morocco", "Netherland", "New_zealand", "Nigeria", "North_korea", "Norway", "Pakistan", "Peru", "Philippines", "Poland",
+  "Portugal", "Romania", "Russia", "Saudi_arabia", "Serbia", "Singapore", "Slovakia", "Slovenia", "South_africa", "South_korea", "Spain", "Sweden", "Switzerland",
+  "Taiwan", "Tanzania", "Thailand", "Turkey", "Ukraine", "United_arab_emirates", "United_kingdom", "United_states_of_america", "Venezuela", "Vietnam",]
 
 country_codes = ["ar", "au", "at", "bd", "be", "br", "bg", "ca", "cl", "cn", "co", "cu", "cz", "eg", "fi", "fr", "de", "gr", "hk", "hu", "in", "id", "iq", "ie", "il",
- "it", "jp", "kz", "kw", "lv", "lb", "lt", "my", "mx", "ma", "nl", "nz", "ng", "kp", "no", "pk", "pe", "ph", "pl", "pt", "ro", "ru", "sa", "rs", "sg", "sk", "si", "za",
+  "it", "jp", "kz", "kw", "lv", "lb", "lt", "my", "mx", "ma", "nl", "nz", "ng", "kp", "no", "pk", "pe", "ph", "pl", "pt", "ro", "ru", "sa", "rs", "sg", "sk", "si", "za",
   "kr", "es", "se", "ch", "tw", "tz", "th", "tr", "ua", "ae", "gb", "us", "ve", "vi",]
 
 news = null
 code = "in"
 country_name = "India"
+search = "India"
 
 
 author = []
@@ -52,21 +53,24 @@ $(`.dropdown-item`).click(function () {
 
   $(".col").remove()
   $("#news-removable").append(`<div class="col flex-container"></div>`)
+  search = country_name
   loaddata()
+  $(".loading").append(`<div><div class="fa-5x loading_class">
+  <i class="fa fa-spinner fa-spin fa-pulse"></i></div></div>`)
 })
 
 function loaddata() {
   const settings = {
     "async": true,
     "crossDomain": true,
-    "url": `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${country_name}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`,
+    "url": `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${search}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`,
     "method": "GET",
     "headers": {
       "X-RapidAPI-Key": "d2af94ecacmshdeebfc210373e8ep177d99jsn573b3d727456",
       "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com"
     }
   };
-  
+
   $.ajax(settings).done(function (response) {
     news = response.value
     sort_news_data(news)
@@ -88,10 +92,12 @@ function sort_news_data(data) {
 
 
 function show_news() {
+  // $(".loading_class").remove()
+
   for (i = 0; i < title.length; i++) {
     if (title[i] !== null) {
-      if(content[i]!==null){
-      $(".col").append(`
+      if (content[i] !== null) {
+        $(".col").append(`
       <div id="together" class="together${i}">
           <div id="news_block" class="card shadow-sm">
               <img id="image" src="${urlToImage[i]}" alt="Loading...." />
@@ -128,7 +134,8 @@ function show_news() {
           </script>
           <div>
         `)
-    }}
+      }
+    }
   }
 }
 
