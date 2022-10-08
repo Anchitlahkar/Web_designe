@@ -60,10 +60,12 @@ $(`.dropdown-item`).click(function () {
 })
 
 function loaddata() {
+  Url = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${search}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`
+  console.log(Url)
   const settings = {
     "async": true,
     "crossDomain": true,
-    "url": `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${search}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`,
+    "url": Url,
     "method": "GET",
     "headers": {
       "X-RapidAPI-Key": "d2af94ecacmshdeebfc210373e8ep177d99jsn573b3d727456",
@@ -77,6 +79,22 @@ function loaddata() {
     show_news()
   });
 }
+
+$("#search-btn").click(function () {
+  value = $("#search-input").val()
+  console.log(value)
+  
+  if (value !== "") {
+    search = value
+    loaddata()
+    $(".loading").append(`<div><div class="fa-5x loading_class">
+  <i class="fa fa-spinner fa-spin fa-pulse"></i></div></div>`)
+  }
+  else{
+    alert("Please enter a keyword")
+  }
+
+})
 
 function sort_news_data(data) {
   console.log(data)
@@ -92,7 +110,7 @@ function sort_news_data(data) {
 
 
 function show_news() {
-  // $(".loading_class").remove()
+  $(".loading_class").remove()
 
   for (i = 0; i < title.length; i++) {
     if (title[i] !== null) {
