@@ -23,7 +23,7 @@ urlToImage = []
 
 
 $(document).ready(function () {
-  loaddata()
+  loaddata(search)
 })
 
 
@@ -54,16 +54,16 @@ $(`.dropdown-item`).click(function () {
   $(".col").remove()
   $("#news-removable").append(`<div class="col flex-container"></div>`)
   search = country_name
-  loaddata()
+  loaddata(search)
 })
 
-function loaddata() {
+function loaddata(data) {
   $(".loading_class").remove()
 
   $(".loading").append(`<div><div class="fa-5x loading_class">
   <i class="fa fa-spinner fa-spin fa-pulse"></i></div></div>`)
 
-  Url = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${search}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`
+  Url = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${data}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`
 
   console.log(Url)
   const settings = {
@@ -90,7 +90,7 @@ $("#search-btn").click(function () {
   
   if (value !== "") {
     search = value
-    loaddata()
+    loaddata(search)
   }
   else{
     alert("Please enter a keyword")
