@@ -1,4 +1,4 @@
-country = ["Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Brazil", "Bulgaria", "Canada", "Chile", "China", "Colombia", "Cuba", "Czech_republic", "Egypt",
+country = ["World", "Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Brazil", "Bulgaria", "Canada", "Chile", "China", "Colombia", "Cuba", "Czech_republic", "Egypt",
   "Finland", "France", "Germany", "Greece", "Hong_kong", "Hungary", "India", "Indonesia", "Iraq", "Ireland", "Israel", "Italy", "Japan", "Kazakhstan", "Kuwait", "Latvia",
   "Lebanon", "Lithuania", "Malaysia", "Mexico", "Morocco", "Netherland", "New_zealand", "Nigeria", "North_korea", "Norway", "Pakistan", "Peru", "Philippines", "Poland",
   "Portugal", "Romania", "Russia", "Saudi_arabia", "Serbia", "Singapore", "Slovakia", "Slovenia", "South_africa", "South_korea", "Spain", "Sweden", "Switzerland",
@@ -13,6 +13,12 @@ code = "in"
 country_name = "India"
 search = "India"
 
+calls = 0
+
+
+api_list = ["d2af94ecacmshdeebfc210373e8ep177d99jsn573b3d727456", "accedf7bf4msh4a8a92463ff4f82p149113jsn12c0378dffad","a955d335cdmsh0a4365e1b65345fp1ee9ddjsn20e727d988f0"]
+
+try_api = api_list[0]
 
 author = []
 content = []
@@ -57,6 +63,35 @@ $(`.dropdown-item`).click(function () {
   loaddata(search)
 })
 
+
+function api_call() {
+  $.ajax({
+    "async": true,
+    "crossDomain": true,
+    "url": Url,
+    "method": "GET",
+    "headers": {
+      "X-RapidAPI-Key": `${try_api}`,
+      "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com"
+    },
+    success: function (response) {
+      console.log(response)
+      news = response.value
+      sort_news_data(news)
+      show_news()
+    },
+    error: function (error) {
+      console.log(try_api)
+      try_api = api_list[calls + 1]
+      calls += 1
+
+      console.log(try_api)
+      console.log("error")
+      loaddata(search)
+    }
+  })
+}
+
 function loaddata(data) {
   $(".loading_class").remove()
 
@@ -65,46 +100,41 @@ function loaddata(data) {
 
   Url = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${data}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`
 
-  console.log(Url)
-  const settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": Url,
-    "method": "GET",
-    "headers": {
-      "X-RapidAPI-Key": "d2af94ecacmshdeebfc210373e8ep177d99jsn573b3d727456", //"accedf7bf4msh4a8a92463ff4f82p149113jsn12c0378dffad" 
-      "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com"
-    }
-  };
-
-  // $.ajax(settings).done(function (response) {
-  //   console.log(response)
-  //   news = response.value
-  //   sort_news_data(news)
-  //   show_news()
-  // });
-
-  $.ajax({
-    url: "https://raw.githubusercontent.com/Anchitlahkar/Web_designe/master/data.json",
-    crossDomain: true,
-    method: "GET",
-    success: function (res) {
-      const response = JSON.parse(res);
-      // console.log(response)
-      news = response["value"]
-      sort_news_data(news)
-      show_news()
-    }
-  })
+  console.log(api_list.length)
+  if (title.length === 0) {
+    api_call()
+  }
 }
+
+// $.ajax({
+//   url: "https://raw.githubusercontent.com/Anchitlahkar/Web_designe/master/data.json",
+//   crossDomain: true,
+//   method: "GET",
+//   success: function (res) {
+//     const response = JSON.parse(res);
+//     // console.log(response)
+//     news = response["value"]
+//     sort_news_data(news)
+//     show_news()
+//   }
+// })
+
 
 $("#search-btn").click(function () {
   value = $("#search-input").val()
   // console.log(value)
 
   if (value !== "") {
-    search = value
-    loaddata(search)
+    author = []
+    content = []
+    description = []
+    title = []
+    url_news = []
+    urlToImage = []
+
+    $(".col").remove()
+    $("#news-removable").append(`<div class="col flex-container"></div>`)
+    loaddata(value)
   }
   else {
     alert("Please enter a keyword")
