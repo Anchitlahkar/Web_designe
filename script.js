@@ -65,7 +65,7 @@ function loaddata(data) {
 
   Url = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${data}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`
 
-  // console.log(Url)
+  console.log(Url)
   const settings = {
     "async": true,
     "crossDomain": true,
@@ -89,8 +89,9 @@ function loaddata(data) {
     crossDomain: true,
     method: "GET",
     success: function (res) {
-      console.log(res)
-      news = res["value"]
+      const response = JSON.parse(res);
+      // console.log(response)
+      news = response["value"]
       sort_news_data(news)
       show_news()
     }
@@ -133,9 +134,13 @@ function show_news() {
         $(".col").append(`
       <div id="together" class="together${i}">
           <div id="news_block" class="card shadow-sm">
-              <img id="image" src="${urlToImage[i]}" alt="Loading...." />
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <img width="100%" height="100%" src="${urlToImage[i]}"</img><rect width="100%" height="100%" fill="#55595c"></rect>
+        </svg>
             <div class="card-body">
-            <h3>${title[i]}</h3>
+            <h3><b>${title[i]}</b></h3>
+            <br>
               <p class="card-text">${description[i]}</p>
               <div class=" justify-content-between align-items-center">
                 <div class="btn-group">
@@ -150,7 +155,7 @@ function show_news() {
           <div class="overlay-content">
           <img id="image" src="${urlToImage[i]}" alt="Image" />
           <br>
-          <h2 id="text">${title[i]}</h2><br>
+          <h2 id="text"><b>${title[i]}</b></h2><br>
           <p id="text">${content[i]}</p>
           <button class="button button1"><a href="${url_news[i]}">Read All</a></Button>
           </div>
