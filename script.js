@@ -131,7 +131,7 @@ $("#search-btn").click(function () {
     tag = `${value}`
 
     $("#country_name").empty()
-    $("#country_name").append(`<a class="nav-link"> Related To ${country_name}</a>`)
+    $("#country_name").append(`<a class="nav-link"> Related To ${tag}</a>`)
     
 
     author = []
