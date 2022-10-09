@@ -199,6 +199,7 @@ body {
 	transition-duration: 1s;
 	cursor: pointer;
 	border-radius: 20px;
+	margin-bottom: 20px;
 }
 
 .button1 {
