@@ -23,7 +23,7 @@ urlToImage = []
 
 
 $(document).ready(function () {
-  loaddata()
+  loaddata(search)
 })
 
 
@@ -54,51 +54,65 @@ $(`.dropdown-item`).click(function () {
   $(".col").remove()
   $("#news-removable").append(`<div class="col flex-container"></div>`)
   search = country_name
-  loaddata()
+  loaddata(search)
 })
 
-function loaddata() {
+function loaddata(data) {
   $(".loading_class").remove()
-  
+
   $(".loading").append(`<div><div class="fa-5x loading_class">
   <i class="fa fa-spinner fa-spin fa-pulse"></i></div></div>`)
 
-  Url = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${search}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`
-  console.log(Url)
+  Url = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=${data}&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`
+
+  // console.log(Url)
   const settings = {
     "async": true,
     "crossDomain": true,
     "url": Url,
     "method": "GET",
     "headers": {
-      "X-RapidAPI-Key": "d2af94ecacmshdeebfc210373e8ep177d99jsn573b3d727456",
+      "X-RapidAPI-Key": "d2af94ecacmshdeebfc210373e8ep177d99jsn573b3d727456", //"accedf7bf4msh4a8a92463ff4f82p149113jsn12c0378dffad" 
       "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com"
     }
   };
 
-  $.ajax(settings).done(function (response) {
-    news = response.value
-    sort_news_data(news)
-    show_news()
-  });
+  // $.ajax(settings).done(function (response) {
+  //   console.log(response)
+  //   news = response.value
+  //   sort_news_data(news)
+  //   show_news()
+  // });
+
+  $.ajax({
+    url: "https://raw.githubusercontent.com/Anchitlahkar/Web_designe/master/data.json",
+    crossDomain: true,
+    method: "GET",
+    success: function (res) {
+      console.log(res)
+      news = res["value"]
+      sort_news_data(news)
+      show_news()
+    }
+  })
 }
 
 $("#search-btn").click(function () {
   value = $("#search-input").val()
-  console.log(value)
-  
+  // console.log(value)
+
   if (value !== "") {
     search = value
-    loaddata()
+    loaddata(search)
   }
-  else{
+  else {
     alert("Please enter a keyword")
   }
 
 })
 
 function sort_news_data(data) {
-  console.log(data)
+  // console.log(data)
   for (i = 0; i < data.length; i++) {
     author.push(data[i].provider.name)
     content.push(data[i].snippet)
