@@ -72,17 +72,17 @@ img {
 	border-radius: 25px;
 }
 
-#together{
+#together {
 	max-width: 700px;
 }
 
-#news-removable{
+#news-removable {
 	display: flex;
 	justify-content: space-evenly;
-	
+
 }
 
-.loading_class{
+.loading_class {
 	margin-left: 50%;
 }
 
@@ -133,6 +133,28 @@ body {
 	font-size: 60px;
 }
 
+@media screen and (max-height: 450px) {
+	.overlay a {
+		font-size: 20px
+	}
+
+	.overlay .closebtn {
+		font-size: 40px;
+		top: 15px;
+		right: 35px;
+	}
+
+	img {
+		max-height: 250px;
+		height: auto;
+		width: auto;
+		max-width: 280px;
+		margin-bottom: 25px;
+		border-radius: 25px;
+	}
+
+}
+
 @media screen and (max-height: 700px) {
 	.overlay {
 		overflow-y: auto;
@@ -156,45 +178,10 @@ body {
 		margin-bottom: 25px;
 		border-radius: 25px;
 	}
-	
-	#together{
+
+	#together {
 		max-width: 300px;
 		margin: 15px;
-	}
-
-	body {
-		font-family: 'Comic Neue';
-	}
-
-}
-
-@media screen and (max-height: 500px) {
-	.overlay {
-		overflow-y: auto;
-	}
-
-	.overlay a {
-		font-size: 20px
-	}
-
-	.overlay .closebtn {
-		font-size: 40px;
-		top: 15px;
-		right: 35px;
-	}
-
-	img {
-		max-height: 250px;
-		height: auto;
-		width: auto;
-		max-width: 500px;
-		margin-bottom: 25px;
-		border-radius: 25px;
-	}
-	
-	#together{
-		max-width: 100px;
-		margin: 10px;
 	}
 
 	body {
@@ -226,10 +213,10 @@ body {
 }
 
 
-#text{
-	color:#f1f1f1
+#text {
+	color: #f1f1f1
 }
 
-h2{
+h2 {
 	font-weight: 700px;
 }
