@@ -13,6 +13,8 @@ code = "in"
 country_name = "India"
 search = "India"
 
+tag = "News From"
+
 calls = 0
 
 
@@ -47,7 +49,7 @@ $(`.dropdown-item`).click(function () {
   country_name = take_code.split(":")[1]
 
   $("#country_name").empty()
-  $("#country_name").append(`<a class="nav-link" href="#">${country_name}</a>`)
+  $("#country_name").append(`<a class="nav-link">From  ${country_name}</a>`)
 
 
   author = []
@@ -90,6 +92,20 @@ function api_call() {
       loaddata(search)
     }
   })
+
+
+  // $.ajax({
+  //   url: "https://raw.githubusercontent.com/Anchitlahkar/Web_designe/master/data.json",
+  //   crossDomain: true,
+  //   method: "GET",
+  //   success: function (res) {
+  //     const response = JSON.parse(res);
+  //     // console.log(response)
+  //     news = response["value"]
+  //     sort_news_data(news)
+  //     show_news()
+  //   }
+  // })
 }
 
 function loaddata(data) {
@@ -106,25 +122,18 @@ function loaddata(data) {
   }
 }
 
-// $.ajax({
-//   url: "https://raw.githubusercontent.com/Anchitlahkar/Web_designe/master/data.json",
-//   crossDomain: true,
-//   method: "GET",
-//   success: function (res) {
-//     const response = JSON.parse(res);
-//     // console.log(response)
-//     news = response["value"]
-//     sort_news_data(news)
-//     show_news()
-//   }
-// })
-
 
 $("#search-btn").click(function () {
   value = $("#search-input").val()
-  // console.log(value)
+  console.log(value)
 
   if (value !== "") {
+    tag = `${value}`
+
+    $("#country_name").empty()
+    $("#country_name").append(`<a class="nav-link"> Related To ${country_name}</a>`)
+    
+
     author = []
     content = []
     description = []
