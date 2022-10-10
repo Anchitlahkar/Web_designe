@@ -1,8 +1,8 @@
-country = ["World", "Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Brazil", "Bulgaria", "Canada", "Chile", "China", "Colombia", "Cuba", "Czech_republic", "Egypt",
-  "Finland", "France", "Germany", "Greece", "Hong_kong", "Hungary", "India", "Indonesia", "Iraq", "Ireland", "Israel", "Italy", "Japan", "Kazakhstan", "Kuwait", "Latvia",
-  "Lebanon", "Lithuania", "Malaysia", "Mexico", "Morocco", "Netherland", "New_zealand", "Nigeria", "North_korea", "Norway", "Pakistan", "Peru", "Philippines", "Poland",
-  "Portugal", "Romania", "Russia", "Saudi_arabia", "Serbia", "Singapore", "Slovakia", "Slovenia", "South_africa", "South_korea", "Spain", "Sweden", "Switzerland",
-  "Taiwan", "Tanzania", "Thailand", "Turkey", "Ukraine", "United_arab_emirates", "United_kingdom", "United_states_of_america", "Venezuela", "Vietnam",]
+country = ["World", "Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Brazil", "Bulgaria", "Canada", "Chile", "China", "Colombia", "Cuba", "Czech Republic", "Egypt",
+  "Finland", "France", "Germany", "Greece", "Hong Kong", "Hungary", "India", "Indonesia", "Iraq", "Ireland", "Israel", "Italy", "Japan", "Kazakhstan", "Kuwait", "Latvia",
+  "Lebanon", "Lithuania", "Malaysia", "Mexico", "Morocco", "Netherland", "New Zealand", "Nigeria", "North Korea", "Norway", "Pakistan", "Peru", "Philippines", "Poland",
+  "Portugal", "Romania", "Russia", "Saudi Arabia", "Serbia", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland",
+  "Taiwan", "Tanzania", "Thailand", "Turkey", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Venezuela", "Vietnam",]
 
 country_codes = ["ar", "au", "at", "bd", "be", "br", "bg", "ca", "cl", "cn", "co", "cu", "cz", "eg", "fi", "fr", "de", "gr", "hk", "hu", "in", "id", "iq", "ie", "il",
   "it", "jp", "kz", "kw", "lv", "lb", "lt", "my", "mx", "ma", "nl", "nz", "ng", "kp", "no", "pk", "pe", "ph", "pl", "pt", "ro", "ru", "sa", "rs", "sg", "sk", "si", "za",
@@ -62,6 +62,7 @@ $(`.dropdown-item`).click(function () {
   $(".col").remove()
   $("#news-removable").append(`<div class="col flex-container"></div>`)
   search = country_name
+  console.log(search)
   loaddata(search)
 })
 
@@ -125,7 +126,7 @@ function loaddata(data) {
 
 $("#search-btn").click(function () {
   value = $("#search-input").val()
-  console.log(value)
+  window.location.href = '?#';
 
   if (value !== "") {
     tag = `${value}`
@@ -133,7 +134,6 @@ $("#search-btn").click(function () {
     $("#country_name").empty()
     $("#country_name").append(`<a class="nav-link"> Related To ${tag}</a>`)
     
-
     author = []
     content = []
     description = []
@@ -143,7 +143,8 @@ $("#search-btn").click(function () {
 
     $(".col").remove()
     $("#news-removable").append(`<div class="col flex-container"></div>`)
-    loaddata(value)
+    console.log(tag)
+    loaddata(tag)
   }
   else {
     alert("Please enter a keyword")
